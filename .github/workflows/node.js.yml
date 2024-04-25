@@ -21,7 +21,5 @@ jobs:
           cd /var/www/app
           git pull origin master
           npm install
-          pm2 restart app
-
-
-      
+          npm run build
+          npm run start:prod
