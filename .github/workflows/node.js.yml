@@ -11,15 +11,18 @@ on:
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     steps:
+    - name: Checkout code
     - uses: actions/checkout@v3
-    - name: Use Node.js 22.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 22.x
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run start
+    - name: Deploy
+      run: |
+          cd /var/www/app
+          git pull origin master
+          npm install
+          npm run build
+          pm2 restart app
+
+
+      
